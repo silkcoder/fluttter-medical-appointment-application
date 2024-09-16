@@ -12,6 +12,10 @@ dependencies:
     sdk: flutter
   flutter_screenutil: ^5.9.3    
   time_slot: ^1.0.0
+  flutter_bloc: ^7.0.0
+  bloc: ^7.0.0
+  formz: ^0.7.0
+
 
 dev_dependencies:
   flutter_test:

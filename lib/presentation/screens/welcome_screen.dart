@@ -1,12 +1,9 @@
 import 'package:doctor_appointment/presentation/screens/booking_screen.dart';
 import 'package:doctor_appointment/presentation/screens/calendar_screen.dart';
-import 'package:doctor_appointment/presentation/screens/doctor_screen.dart';
 import 'package:doctor_appointment/presentation/screens/favorites_screen.dart';
-import 'package:doctor_appointment/presentation/screens/home_screen.dart';
 import 'package:doctor_appointment/presentation/screens/login_screen.dart';
 import 'package:doctor_appointment/presentation/screens/profile_screen.dart';
 import 'package:doctor_appointment/presentation/screens/signup_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
