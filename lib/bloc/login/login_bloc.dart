@@ -2,13 +2,18 @@ import 'package:bloc/bloc.dart';
 import 'package:doctor_appointment/bloc/login/login_form_status.dart';
 import 'package:doctor_appointment/data/models/form/email.dart';
 import 'package:doctor_appointment/data/models/form/password.dart';
+import 'package:doctor_appointment/data/models/user.dart';
+import 'package:doctor_appointment/data/repositories/auth_repository.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  LoginBloc()
-      : super(LoginState(
+  AuthRepository authRepository = AuthRepository();
+
+  LoginBloc({
+    required this.authRepository,
+  }) : super(LoginState(
             email: Email.initial(),
             password: Password.initial(),
             formStatus: const InitialLoginFormStatus())) {
@@ -25,30 +30,30 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     });
 
     on<LoginSubmitted>((event, emit) async {
-        emit(state.copyWith(formStatus: const LoginFormSubmitting()));
+      emit(state.copyWith(formStatus: const LoginFormSubmitting()));
 
-        state.email.validate();
-        state.password.validate();
+      state.email.validate();
+      state.password.validate();
 
-
-        if (!state.email.isValid || !state.password.isValid) {
-          emit(state.copyWith(
-            email: state.email,
-            password: state.password,
-            formStatus: const LoginFormSubmitted()));
-            return;
-        }
-
+      if (!state.email.isValid || !state.password.isValid) {
         emit(state.copyWith(
             email: state.email,
             password: state.password,
             formStatus: const LoginFormSubmitted()));
-      
-        // await Future.delayed(const Duration(seconds: 1));
+        return;
+      }
 
-
-      // emit(state.copyWith(
-      // email: state.email, password: state.password, formStatus: const LoginFormSuccess()));
+      try {
+        User user = await authRepository.signInWithEmailAndPassword(
+            state.email.value, state.password.value);
+        emit(state.copyWith(formStatus: const LoginFormSuccess()));
+      } catch (e) {
+        emit(state.copyWith(
+          formStatus:
+              const LoginFormFailure('Login failed, Invalid email or password'),
+        ));
+        return;
+      }
     });
   }
 }
