@@ -1,33 +1,26 @@
-import 'package:doctor_appointment/data/models/form/confirm_password.dart';
-
-class Password {
+class ConfirmPassword {
   String value;
   bool isValid;
   String error;
 
-  Password({
+  ConfirmPassword({
     required this.value,
     this.isValid = false,
     this.error = '',
   });
 
   //add validation method, do all the validation here and set isValid and error
-  void validate({ConfirmPassword? confirmPassword}) {
+  void validate(String password) {
     if (value.isEmpty) {
       isValid = false;
-      error = 'Password required';
+      error = 'Password confirmation required';
       return;
     }
 
-    //minimum 6 characters
-    if (value.length < 6) {
+    if (value != password) {
       isValid = false;
-      error = 'Minimum 6 characters required';
+      error = 'Password does not match';
       return;
-    }
-
-    if (confirmPassword != null) {
-      confirmPassword.validate(value);
     }
 
     isValid = true;
@@ -35,7 +28,7 @@ class Password {
     return;
   }
 
-  Password.initial()
+  ConfirmPassword.initial()
       : value = '',
         isValid = false,
         error = '';

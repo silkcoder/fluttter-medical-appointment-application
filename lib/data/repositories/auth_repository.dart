@@ -8,7 +8,7 @@ class AuthRepository {
     return await loginDataProvider.login(email, password);
   }
 
-  Future<void> signUpWithEmailAndPassword(String email, String password) async {
+  Future<void> signUpWithEmailAndPassword(String name, String email, String password) async {
     // Sign up with email and password
   }
 }

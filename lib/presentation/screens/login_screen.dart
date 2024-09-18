@@ -279,12 +279,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(
                         width: 4.w,
                       ),
-                      Text(
-                        'Sign Up Now',
-                        style: TextStyle(
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.purple),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pushNamed('/signup');
+                        },
+                        child: Text(
+                          'Sign Up Now',
+                          style: TextStyle(
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.purple),
+                        ),
                       ),
                     ],
                   ),

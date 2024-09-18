@@ -1,4 +1,5 @@
 import 'package:doctor_appointment/bloc/login/login_bloc.dart';
+import 'package:doctor_appointment/bloc/signup/signup_bloc.dart';
 import 'package:doctor_appointment/data/repositories/auth_repository.dart';
 import 'package:doctor_appointment/presentation/screens/login_screen.dart';
 import 'package:doctor_appointment/presentation/screens/signup_screen.dart';
@@ -35,7 +36,15 @@ class _MainAppState extends State<MainApp> {
                       child: const LoginScreen(),
                     ),
                   ),
-              '/signup': (context) => const SignUp(),
+              '/signup': (context) => RepositoryProvider(
+                    create: (context) => AuthRepository(),
+                    child: BlocProvider(
+                      create: (context) => SignupBloc(
+                        authRepository: context.read<AuthRepository>(),
+                      ),
+                      child: const SignUp(),
+                    ),
+                  ),
               '/welcome': (context) => const WelcomeScreen(),
             },
             //set default route
