@@ -19,8 +19,9 @@ class SignupFormSuccess extends SignupFormStatus {
 }
 
 class SignupFormFailure extends SignupFormStatus {
-  final String errorMessage;
+  final String message;
+  const SignupFormFailure(this.message);
 
-  const SignupFormFailure(this.errorMessage);
+  String get errorMessage => message;
 }
 

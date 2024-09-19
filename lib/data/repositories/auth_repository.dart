@@ -1,4 +1,8 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:doctor_appointment/data/data_providers/login_data_provider.dart';
+import 'package:doctor_appointment/data/data_providers/signup_data_provider.dart';
 import 'package:doctor_appointment/data/models/user.dart';
 
 class AuthRepository {
@@ -8,7 +12,23 @@ class AuthRepository {
     return await loginDataProvider.login(email, password);
   }
 
-  Future<void> signUpWithEmailAndPassword(String name, String email, String password) async {
-    // Sign up with email and password
+  Future<User> signUpWithEmailAndPassword(String name, String email, String password) async {
+    SignUpDataProvider signUpDataProvider = SignUpDataProvider();
+
+    try {
+      User user = await signUpDataProvider.signUp(name, email, password);
+
+      print('INSIDE REPOSITORY');
+      print(user);
+
+      return user;
+    } catch (e) {
+
+      print('INSIDE REPOSITORY CATCH 123');
+      return Future.error(e);
+
+    }
+        
+     return Future.error('Sign up failed');   
   }
 }

@@ -168,8 +168,35 @@ class _SignUpState extends State<SignUp> {
                   ),
                 ),
                 SizedBox(
-                  height: 16.h,
+                  height: 10.h,
+                ),                
+                //show login failed message
+                BlocBuilder<SignupBloc, SignupState>(
+                  builder: (context, state) {
+                    if (state.formStatus is SignupFormFailure) {                    
+                      return Container(
+                        width: double.infinity,
+                        padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.w),
+                        decoration: BoxDecoration(
+                          color: Colors.red[100],
+                          borderRadius: BorderRadius.circular(8.r),
+                        ),
+                        child: Text(
+                          (state.formStatus as SignupFormFailure).errorMessage,
+                          style: TextStyle(
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.red),
+                        ),
+                      );
+                    } else {
+                      return const SizedBox();
+                    }
+                  },
                 ),
+                SizedBox(
+                  height: 16.h,
+                ),                
                 Row(
                   children: [
                     const Expanded(

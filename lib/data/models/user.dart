@@ -12,4 +12,13 @@ class User {
       email: json['email'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'token': token,
+      'name': name,
+      'email': email,
+    };
+  }
+  
 }

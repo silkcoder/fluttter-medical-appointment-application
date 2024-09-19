@@ -14,7 +14,7 @@ dependencies:
   time_slot: ^1.0.0
   flutter_bloc: ^7.0.0
   bloc: ^7.0.0
-  formz: ^0.7.0
+  dio: ^4.0.0
 
 
 dev_dependencies:
