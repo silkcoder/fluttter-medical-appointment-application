@@ -12,23 +12,15 @@ class AuthRepository {
     return await loginDataProvider.login(email, password);
   }
 
-  Future<User> signUpWithEmailAndPassword(String name, String email, String password) async {
+  Future<User> signUpWithEmailAndPassword(
+      String name, String email, String password) async {
     SignUpDataProvider signUpDataProvider = SignUpDataProvider();
 
     try {
       User user = await signUpDataProvider.signUp(name, email, password);
-
-      print('INSIDE REPOSITORY');
-      print(user);
-
       return user;
     } catch (e) {
-
-      print('INSIDE REPOSITORY CATCH 123');
       return Future.error(e);
-
     }
-        
-     return Future.error('Sign up failed');   
   }
 }

@@ -7,6 +7,8 @@ import 'package:doctor_appointment/data/models/form/name.dart';
 import 'package:doctor_appointment/data/models/form/password.dart';
 import 'package:doctor_appointment/data/models/user.dart';
 import 'package:doctor_appointment/data/repositories/auth_repository.dart';
+import 'package:doctor_appointment/network/dio_exception.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'signup_event.dart';
 part 'signup_state.dart';
@@ -47,6 +49,8 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
     on<SignupSubmitted>((event, emit) async {
       emit(state.copyWith(formStatus: const SignupFormSubmitting()));
 
+      await Future.delayed(const Duration(seconds: 1));
+
       state.email.validate();
       state.password.validate();
       state.name.validate();
@@ -67,45 +71,25 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
       }
 
       try {
-        print('INSIDE BLOC TRY BLOCK 123');
-        User user = await authRepository.signUpWithEmailAndPassword(
-            state.name.value, state.email.value, state.password.value);
+        User user = await authRepository.signUpWithEmailAndPassword(state.name.value, state.email.value, state.password.value);
+        String token = user.token;
 
-        print('USER TOKEN: ${user}');
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString('token', token);
+
+        emit(state.copyWith(formStatus: const SignupFormSuccess()));        
+      } on DioError catch (e) {
+        String errorMessage = DioException.fromDioError(e).errorMessage;
+        emit(state.copyWith(
+          formStatus: SignupFormFailure(errorMessage),
+        ));
       } catch (e) {
-        print('INSIDE BLOC CATCH BLOCK ERROR 2111');
 
-        if (e is DioError) {
-          if (e.response!.statusCode == 422) {
-            Map<String, dynamic> response = e.response!.data;
-            String message = response['message'];
+        print(e);
 
-            print('INSIDE BLOC DIO ERROR');
-
-            emit(state.copyWith(
-              formStatus: SignupFormFailure(message),
-            ));
-          } else {
-            emit(state.copyWith(
-              formStatus:
-                  SignupFormFailure('Something went wrong, please try again'),
-            ));
-          }
-
-          //return Future.error('REPO Sign up failed');
-        } else {
-          print('INSIDE BLOC ELSE BLOCK ERROR');
-
-          emit(state.copyWith(
-            formStatus:
-                SignupFormFailure('Something went wrong, please try again'),
-          ));
-        }
-
-        // emit(state.copyWith(
-        //     formStatus:
-        //         SignupFormFailure('Something went wrong, please try again 123'),
-        //   ));
+        emit(state.copyWith(
+          formStatus: const SignupFormFailure('Something went wrong'),
+        ));
       }
     });
   }

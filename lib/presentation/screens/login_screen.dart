@@ -15,9 +15,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return Scaffold(
           body: SafeArea(
         child: SingleChildScrollView(
           child: BlocListener<LoginBloc, LoginState>(
@@ -298,8 +296,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
         ),
-      )),
-    );
+      ));
   }
 }
 
