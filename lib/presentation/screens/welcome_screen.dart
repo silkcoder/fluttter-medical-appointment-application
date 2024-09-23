@@ -1,3 +1,6 @@
+import 'package:doctor_appointment/bloc/dashboard/dashboard_bloc.dart';
+import 'package:doctor_appointment/data/data_providers/dashboard_data_provider.dart';
+import 'package:doctor_appointment/data/repositories/dashboard_depository.dart';
 import 'package:doctor_appointment/presentation/screens/booking_screen.dart';
 import 'package:doctor_appointment/presentation/screens/calendar_screen.dart';
 import 'package:doctor_appointment/presentation/screens/doctor_screen.dart';
@@ -7,6 +10,7 @@ import 'package:doctor_appointment/presentation/screens/login_screen.dart';
 import 'package:doctor_appointment/presentation/screens/profile_screen.dart';
 import 'package:doctor_appointment/presentation/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -24,13 +28,25 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     });
   }
 
-  final List<Widget> _pages = const [
-    HomeScreen(),
-    DoctorScreen(),
-    BookingScreen(),
-    CalendarScreen(),
-    FavoritesScreen(),
-    ProfileScreen(),
+  final List<Widget> _pages = [
+    RepositoryProvider(
+      create: (context) => DashboardRepository(
+        dashboardDataProvider: DashboardDataProvider(),
+      ),
+      child: BlocProvider(
+        create: (context) => DashboardBloc(
+          dashboardRepository: context.read<DashboardRepository>(),
+        )..add(
+            DashboardInitialEvent(),
+          ),
+        child: const HomeScreen(),
+      ),
+    ),
+    const DoctorScreen(),
+    const BookingScreen(),
+    const CalendarScreen(),
+    const FavoritesScreen(),
+    const ProfileScreen(),
   ];
 
   @override

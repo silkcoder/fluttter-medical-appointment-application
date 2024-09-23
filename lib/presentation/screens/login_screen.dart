@@ -16,7 +16,13 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-          body: SafeArea(
+        body: SafeArea(
+      child: BlocListener<LoginBloc, LoginState>(
+        listener: (context, state) {
+          if (state.formStatus is LoginFormSuccess) {
+            Navigator.pushNamedAndRemoveUntil(context, '/welcome', (route) => false);
+          }
+        },
         child: SingleChildScrollView(
           child: BlocListener<LoginBloc, LoginState>(
             listener: (context, state) {
@@ -296,7 +302,8 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
         ),
-      ));
+      ),
+    ));
   }
 }
 

@@ -1,23 +1,25 @@
+import 'package:dio/dio.dart';
 import 'package:doctor_appointment/data/models/user.dart';
+import 'package:doctor_appointment/network/api_service.dart';
 
 class LoginDataProvider {
   Future<User> login(String email, String password) async {
     // Simulate a network request
     try {
-      await Future.delayed(const Duration(seconds: 3));
-      if (email == 'hello@test.com' && password == 'password') {
-        User user = User(
-          token: 'token',
-          email: 'hello@est.com',
-          name: 'John Doe',
-        );
+      ApiService apiService = ApiService.instance;
+      apiService.configureDio(baseUrl: 'http://ablepro.test/api');
 
-        return user;
-      }
+      Response postResponse = await apiService.postRequest(
+        '/login',
+        data: {
+          'email': email,
+          'password': password,
+        },
+      );
 
-      return Future.error('Invalid email or password');
+      return User.fromJson(postResponse.data);
     } catch (e) {
-      return Future.error(e.toString());
+      return Future.error(e);
     }
   }
 }

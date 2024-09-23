@@ -4,6 +4,7 @@ import 'package:doctor_appointment/data/models/form/email.dart';
 import 'package:doctor_appointment/data/models/form/password.dart';
 import 'package:doctor_appointment/data/models/user.dart';
 import 'package:doctor_appointment/data/repositories/auth_repository.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
@@ -46,6 +47,15 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       try {
         User user = await authRepository.signInWithEmailAndPassword(
             state.email.value, state.password.value);
+
+        //save token to shared preferences
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString('token', user.token);
+
+        //read token from shared preferences
+        String? token = prefs.getString('token');
+        print('Token: $token');
+
         emit(state.copyWith(formStatus: const LoginFormSuccess()));
       } catch (e) {
         emit(state.copyWith(

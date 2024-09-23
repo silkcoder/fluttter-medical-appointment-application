@@ -7,19 +7,24 @@ import 'package:doctor_appointment/presentation/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(const MainApp());
+void main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+  final Auth _auth = Auth();
+  final bool isLogged = await _auth.isLogged();
+  final MainApp myApp = MainApp(
+    initialRoute: isLogged ? '/welcome' : '/login',
+  );
+
+  runApp(myApp);
 }
 
-class MainApp extends StatefulWidget {
-  const MainApp({super.key});
+class MainApp extends StatelessWidget {
+   final String initialRoute;
+  const MainApp({super.key, required this.initialRoute});
 
-  @override
-  State<MainApp> createState() => _MainAppState();
-}
-
-class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -48,9 +53,24 @@ class _MainAppState extends State<MainApp> {
               '/welcome': (context) => const WelcomeScreen(),
             },
             //set default route
-            initialRoute: '/login',
+            initialRoute: initialRoute,
             debugShowCheckedModeBanner: false,
           );
         });
+  }
+}
+
+class Auth {
+ 
+  Future<bool> isLogged() async {
+
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    String? token = localStorage.getString('token');
+
+    if(token != null) {
+        return true;        
+    }
+
+    return false;
   }
 }
