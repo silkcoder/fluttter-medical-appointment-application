@@ -49,7 +49,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
     on<SignupSubmitted>((event, emit) async {
       emit(state.copyWith(formStatus: const SignupFormSubmitting()));
 
-      await Future.delayed(const Duration(seconds: 1));
+      //await Future.delayed(const Duration(seconds: 1));
 
       state.email.validate();
       state.password.validate();

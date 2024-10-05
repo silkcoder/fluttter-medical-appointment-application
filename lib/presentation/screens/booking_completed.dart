@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class CalendarScreen extends StatelessWidget {
-  const CalendarScreen({super.key});
+class BookingCompleted extends StatelessWidget {
+  const BookingCompleted({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class CalendarScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Calendar',
+                'Booking Completed',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w600,                  
@@ -24,12 +24,12 @@ class CalendarScreen extends StatelessWidget {
               const SizedBox(height: 40),
               //show a larage tick icon
               Icon(
-                Icons.calendar_today,
+                Icons.check_circle_outline,
                 size: 120,
                 color: Colors.blue[500]
               ),
               const SizedBox(height: 20),
-              Text('Your calendar is here',
+              Text('Your booking has been confirmed',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w400,

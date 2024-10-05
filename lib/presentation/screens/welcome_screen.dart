@@ -42,8 +42,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         child: const HomeScreen(),
       ),
     ),
-    const DoctorScreen(),
-    const BookingScreen(),
     const CalendarScreen(),
     const FavoritesScreen(),
     const ProfileScreen(),

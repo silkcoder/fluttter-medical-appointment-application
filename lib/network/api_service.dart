@@ -39,6 +39,7 @@ class ApiService {
             (options, handler) {
               debugPrint('Request: ${options.method} ${options.path}');
               debugPrint('Headers: ${options.headers}');
+              debugPrint('Data: ${options.data}');
               debugPrint('Query Params: ${options.queryParameters}');
               handler.next(options);
             },

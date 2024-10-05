@@ -6,12 +6,12 @@ import 'package:doctor_appointment/network/api_service.dart';
 import 'dart:convert';
 
 class DashboardDataProvider {
-  Future<Dashboard> getDashboardData() async {
+  Future<Dashboard> getDashboardData(page) async {
     try {
       ApiService apiService = ApiService.instance;
       apiService.configureDio(baseUrl: 'http://ablepro.test/api');
 
-      Response response = await apiService.getRequest('/dashboard');
+      Response response = await apiService.getRequest('/dashboard?page=$page');
       Map<String, dynamic> data = jsonDecode(response.toString());
 
       List departmentsList = data['data']['departments'] ?? [];

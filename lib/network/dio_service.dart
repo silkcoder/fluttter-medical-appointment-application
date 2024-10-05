@@ -43,7 +43,8 @@ class DioService {
               'Request: ${options.method} ${options.path} ${options.data}');
           debugPrint('Headers: ${options.headers}');
           debugPrint('Query Params: ${options.queryParameters}');
-
+          //print submitting data
+          debugPrint('Data: ${options.data}');
           return handler.next(options); // continue
         },
 
