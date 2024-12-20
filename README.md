@@ -1,6 +1,6 @@
 # Medical appointment booking application
 
-![Login](/screenshots/1.png|width=100)
+![Login|width=100](/screenshots/1.png)
 
 ![Signup](/screenshots/2.png|width=200)
 
