@@ -56,7 +56,7 @@ class MainApp extends StatelessWidget {
                     ),
                   ),
               '/welcome': (context) => const WelcomeScreen(),
-              '/booking-completed':(context) => const BookingCompleted(),
+              '/booking-completed': (context) => const BookingCompleted(),
               '/doctor': (context) => const DoctorScreen(),
               '/booking': (context) => RepositoryProvider(
                     create: (context) => BookingRepository(

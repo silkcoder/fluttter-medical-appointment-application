@@ -67,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     SizedBox(width: 5.w),
                     Text(
-                      'Hamza !',
+                      'John !',
                       style: TextStyle(
                         fontSize: 24.sp,
                         fontWeight: FontWeight.w200,
@@ -301,7 +301,7 @@ class DoctorWidget extends StatelessWidget {
                           InkWell(
                             onTap: () {
                               //navigate to booking screen without hideing the bottom navigation bar
-                              
+
                               //go to booking screen
                               //Navigator.push(context, MaterialPageRoute(builder: (context) => const BookingScreen()));
 
