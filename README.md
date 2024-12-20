@@ -1,6 +1,7 @@
 # Medical appointment booking application
 
 ![Login](/screenshots/1.png)
+<img src="/screenshots/1.png" width="200" />
 
 ![Signup](/screenshots/2.png)
 
