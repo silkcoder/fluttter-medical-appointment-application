@@ -1,14 +1,25 @@
 # Medical appointment booking application
 
-![Login](/screenshots/1.png)
+<p align="center">
 <img src="/screenshots/1.png" width="400" />
+</p>
 
-![Signup](/screenshots/2.png)
+<p align="center">
+<img src="/screenshots/2.png" width="400" />
+</p>
 
-![App Screen](/screenshots/3.png)
+<p align="center">
+<img src="/screenshots/3.png" width="400" />
+</p>
 
-![App Screen](/screenshots/4.png)
+<p align="center">
+<img src="/screenshots/4.png" width="400" />
+</p>
 
-![App Screen](/screenshots/5.png)
+<p align="center">
+<img src="/screenshots/5.png" width="400" />
+</p>
 
-![App Screen](/screenshots/6.png)
+<p align="center">
+<img src="/screenshots/6.png" width="400" />
+</p>
