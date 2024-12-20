@@ -19,7 +19,8 @@ class _SignUpState extends State<SignUp> {
         child: BlocListener<SignupBloc, SignupState>(
           listener: (context, state) {
             if (state.formStatus is SignupFormSuccess) {
-               Navigator.pushNamedAndRemoveUntil(context, '/welcome', (route) => false);
+              Navigator.pushNamedAndRemoveUntil(
+                  context, '/welcome', (route) => false);
             }
           },
           child: SingleChildScrollView(
@@ -32,7 +33,7 @@ class _SignUpState extends State<SignUp> {
                     height: 40.h,
                   ),
                   Text(
-                    'Sign Up to Masterminds',
+                    'Sign Up',
                     style: TextStyle(
                         fontSize: 18.sp,
                         fontWeight: FontWeight.w700,

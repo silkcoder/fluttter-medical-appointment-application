@@ -1,3 +1,1 @@
-# doctor_appointment
-
-A new Flutter project.
+# Medical appointment booking application
